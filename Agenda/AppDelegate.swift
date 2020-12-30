@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import UserNotifications
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+  
+        let autorizacao:UNAuthorizationOptions = [.badge, .alert, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: autorizacao) { (_, _) in
+            
+            // to do: configurar cloud messaging
+            
+        }
+        application.registerForRemoteNotifications()
+        FirebaseApp().configure()
+        
         return true
     }
 
