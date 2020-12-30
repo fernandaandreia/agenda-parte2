@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: autorizacao) { (_, _) in
             
             Messaging.messaging().delegate = self
+            Messaging.messaging().shouldEstabishDirectChannel = true
         }
         application.registerForRemoteNotifications()
         FirebaseApp().configure()
@@ -38,6 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String){
         Firebase().enviaTokenParaServidor(token: fcmToken)
     }
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage){
+        print(remoteMessage.appData)
+    }
+    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
