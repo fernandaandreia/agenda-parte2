@@ -27,6 +27,7 @@
 		AB8511BA259BC45200F72785 /* Filtro.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8511B9259BC45200F72785 /* Filtro.swift */; };
 		AB8511C3259BD3DC00F72785 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB8511C2259BD3DC00F72785 /* GoogleService-Info.plist */; };
 		AB8511CD259CBA6D00F72785 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8511CC259CBA6D00F72785 /* Firebase.swift */; };
+		AB8511D1259CC7B300F72785 /* Configuracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8511D0259CC7B300F72785 /* Configuracao.swift */; };
 		B911302A1FE05358002768A7 /* CalculaMediaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91130291FE05358002768A7 /* CalculaMediaAPI.swift */; };
 		B939B9B81FDAC2630084A557 /* Mensagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B939B9B71FDAC2630084A557 /* Mensagem.swift */; };
 		B9518EFC1FD9BCEB00EBAFA5 /* MenuOpcoesAlunos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9518EFB1FD9BCEB00EBAFA5 /* MenuOpcoesAlunos.swift */; };
@@ -62,6 +63,7 @@
 		AB8511B9259BC45200F72785 /* Filtro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filtro.swift; sourceTree = "<group>"; };
 		AB8511C2259BD3DC00F72785 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		AB8511CC259CBA6D00F72785 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		AB8511D0259CC7B300F72785 /* Configuracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuracao.swift; sourceTree = "<group>"; };
 		B91130291FE05358002768A7 /* CalculaMediaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculaMediaAPI.swift; sourceTree = "<group>"; };
 		B939B9B71FDAC2630084A557 /* Mensagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mensagem.swift; sourceTree = "<group>"; };
 		B9518EFB1FD9BCEB00EBAFA5 /* MenuOpcoesAlunos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOpcoesAlunos.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				AB8511B3259BBF0A00F72785 /* LigacaoTelefonica.swift */,
 				AB8511B6259BC20A00F72785 /* Safari.swift */,
 				AB8511B9259BC45200F72785 /* Filtro.swift */,
+				AB8511D0259CC7B300F72785 /* Configuracao.swift */,
 			);
 			path = Componentes;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				AB8511B7259BC20A00F72785 /* Safari.swift in Sources */,
 				B9518EFC1FD9BCEB00EBAFA5 /* MenuOpcoesAlunos.swift in Sources */,
 				B939B9B81FDAC2630084A557 /* Mensagem.swift in Sources */,
+				AB8511D1259CC7B300F72785 /* Configuracao.swift in Sources */,
 				B9D565A71FE14ECA00BDA536 /* Notificacoes.swift in Sources */,
 				AB8511B4259BBF0A00F72785 /* LigacaoTelefonica.swift in Sources */,
 				AB8511AC259A242B00F72785 /* Repositorio.swift in Sources */,

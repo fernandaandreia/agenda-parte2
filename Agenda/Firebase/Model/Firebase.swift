@@ -13,7 +13,11 @@ class Firebase: NSObject {
 
     
     func enviaTokenParaServidor(token:String){
-        Alamofire.request("http://localhost:8080/api/firebase/dispositivo", method: .post, headers: ["token":token]).responseData { (response) in
+        
+        guard let url = Configuracao().getUrlPadrao() else { return }
+//        print(dicionario)
+        
+        Alamofire.request(url + "api/firebase/dispositivo", method: .post, headers: ["token":token]).responseData { (response) in
             if response.error == nil {
                 print("Token enviado com sucesso")
             }
