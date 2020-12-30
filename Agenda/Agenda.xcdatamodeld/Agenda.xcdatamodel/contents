@@ -6,10 +6,11 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="nome" optional="YES" attributeType="String"/>
         <attribute name="nota" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sincronizado" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="site" optional="YES" attributeType="String"/>
         <attribute name="telefone" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Aluno" positionX="-54" positionY="-9" width="128" height="148"/>
+        <element name="Aluno" positionX="-54" positionY="-9" width="128" height="163"/>
     </elements>
 </model>

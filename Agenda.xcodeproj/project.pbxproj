@@ -214,8 +214,8 @@
 			children = (
 				AB8511A4259A158F00F72785 /* AlunoAPI.swift */,
 				AB8511AE259A257300F72785 /* AlunoDAO.swift */,
-				AB8511AB259A242B00F72785 /* Repositorio.swift */,
 				AB8511D5259CF5C300F72785 /* AlunoUserDefaults.swift */,
+				AB8511AB259A242B00F72785 /* Repositorio.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

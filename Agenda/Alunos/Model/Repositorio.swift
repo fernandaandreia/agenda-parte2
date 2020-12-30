@@ -27,9 +27,14 @@ class Repositorio: NSObject {
         completion()
     }
     
-    func salvaAluno(aluno: Dictionary<String, String>){
-        AlunoAPI().salvaAlunosNoServidor(parametros: [aluno])
+    func salvaAluno(aluno: Dictionary<String, Any>){
+        var dicionario = aluno
         AlunoDAO().salvaAluno(dicionarioDeAluno: aluno)
+        AlunoAPI().salvaAlunosNoServidor(parametros: [aluno]) { (salvo) in
+            if salvo {
+                self.atualizaAlunoSincronizado(dicionario)
+            }
+        }
     }
     
     func deletaAluno(aluno:Aluno){
@@ -40,11 +45,23 @@ class Repositorio: NSObject {
     }
     
     func sincronizaAluno(){
-        let alunos = AlunoDAO().recuperaAlunos()
+        let alunos = AlunoDAO().recuperaAlunos().filter({$0.sincronizado == false})
+        let listaDeParametros = criaJsonAluno(alunos)
+        print("alunos: ")
+        print(listaDeParametros)
+        AlunoAPI().salvaAlunosNoServidor(parametros: listaDeParametros) { (salvo) in
+            for aluno in listaDeParametros {
+                self.atualizaAlunoSincronizado(aluno)
+            }
+            
+        }
+    }
+    
+    func criaJsonAluno(_ alunos: Array<Aluno>){
         var listaDeParametros: Array<Dictionary<String, String>> = []
         for aluno in alunos {
             
-            guard let id = aluno.id else { return }
+            guard let id = aluno.id else { return []}
             let parametros:Dictionary<String, String> = [
                 "id" : String(describing: id).lowercased(),
                 "nome" : aluno.nome ?? "",
@@ -56,7 +73,12 @@ class Repositorio: NSObject {
             ]
             listaDeParametros.append(parametros)
         }
-        AlunoAPI().salvaAlunosNoServidor(parametros: listaDeParametros)
+        return listaDeParametros
     }
-
+    
+    func atualizaAlunoSincronizado(_ aluno:Dictionary<String, Any>){
+        var dicionario = aluno
+        dicionario["sincronizado"] = true
+        AlunoDAO().salvaAluno(dicionarioDeAluno: dicionario)
+    }
 }
