@@ -88,15 +88,17 @@ class AlunoAPI: NSObject {
     
     // MARK: Delete
     
-    func deletaAluno(id: String){
+    func deletaAluno(id: String, completion:@escaping(_ apagado:Bool) -> Void){
         
         Alamofire.request(url + "api/aluno/\(id)", method: .delete).responseJSON { (resposta) in
             switch resposta.result {
-            case .failure:
-                
-                print(resposta.result.error!)
+            
+            case .success:
+                completion(true)
                 break
-            default:
+            case .failure:
+                completion(false)
+                print(resposta.result.error!)
                 break
             }
         }

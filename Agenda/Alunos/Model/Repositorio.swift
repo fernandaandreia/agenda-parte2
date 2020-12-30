@@ -32,7 +32,7 @@ class Repositorio: NSObject {
         AlunoDAO().salvaAluno(dicionarioDeAluno: aluno)
         AlunoAPI().salvaAlunosNoServidor(parametros: [aluno]) { (salvo) in
             if salvo {
-                self.atualizaAlunoSincronizado(dicionario)
+                self.atualizaAlunoSincronizado(aluno)
             }
         }
     }
@@ -40,8 +40,14 @@ class Repositorio: NSObject {
     func deletaAluno(aluno:Aluno){
         
         guard let id = aluno.id else { return }
-        AlunoAPI().deletaAluno(id: String(describing: id).lowercased())
-        AlunoDAO().deletaAluno(aluno: aluno)
+        aluno.desativado = true
+        AlunoDAO().atualizaContexto()
+        AlunoAPI().deletaAluno(id: String(describing: id).lowercased()) { (apagado) in
+            if apagado {
+                AlunoDAO().deletaAluno(aluno: aluno)
+            }
+        }
+        
     }
     
     func sincronizaAluno(){
