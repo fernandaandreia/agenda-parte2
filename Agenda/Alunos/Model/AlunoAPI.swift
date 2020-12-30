@@ -45,7 +45,7 @@ class AlunoAPI: NSObject {
         }
     }
     
-    func recuperaUltimosAlunos (_ versao: String){
+    func recuperaUltimosAlunos (_ versao: String, completion:@escaping() -> Void) {
         Alamofire.request(url + "api/aluno/diff", method: .get, headers: ["datahora":versao]).responseJSON { (response) in
             if response.result {
                 switch response.result {

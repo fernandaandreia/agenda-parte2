@@ -33,11 +33,19 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recuperaAlunos()
+        recuperaTodosAlunos()
     }
     
     @objc  func recarregaAlunos(_ refreshControl:UIRefreshControl){
-        print("atualizar alunos")
+        let ultimaVersao = AlunoUserDefaults().recuperaUltimaVersao()
+        if ultimaVersao == nil {
+            recuperaTodosAlunos()
+        } else {
+            guard let versao = ultimaVersao else { return }
+            Repositorio().recuperaUltimosAlunos(versao) {
+                <#code#>
+            }
+        }
         refreshControl.endRefreshing()
     }
     // MARK: - Métodos
@@ -49,10 +57,10 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @objc func atualizaAlunos() {
-        recuperaAlunos()
+        recuperaTodosAlunos()
     }
     
-    func recuperaAlunos(){
+    func recuperaTodosAlunos(){
         Repositorio().recuperaAlunos {  (listaDeAlunos)  in
             self.alunos = listaDeAlunos
     }

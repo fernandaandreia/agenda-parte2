@@ -16,5 +16,8 @@ class AlunoUserDefaults: NSObject {
         guard let versao = json["momentoDaUltimaModificacao"] as? String else { return }
         preferencias.set(versao, forKey: "ultima-versao")
     }
-
+    func recuperaUltimaVersao() -> String? {
+        let versao = preferencias.object(forKey: "ultima-versao")
+        return versao
+    }
 }
