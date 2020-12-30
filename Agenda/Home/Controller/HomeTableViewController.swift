@@ -23,6 +23,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configuraSearch()
+        NotificationCenter.default.addObserver(self, selector: #selector(atualizaAlunos), name: NSNotification.Name(rawValue: "atualizaAlunos"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +35,10 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
         if segue.identifier == "editar" {
             alunoViewController = segue.destination as? AlunoViewController
         }
+    }
+    
+    @objc func atualizaAlunos() {
+        recuperaAlunos()
     }
     
     func recuperaAlunos(){
