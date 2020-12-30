@@ -36,9 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String){
-        print("token: ")
-        print(fcmToken)
-        print("----")
+        Firebase().enviaTokenParaServidor(token: fcmToken)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
