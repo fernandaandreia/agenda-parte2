@@ -29,11 +29,8 @@ class AlunoAPI: NSObject {
             switch response.result {
             case .success:
                 if let resposta = response.result.value as? Dictionary<String, Any> {
-                    guard let listaDeAlunos = resposta["alunos"] as? Array<Dictionary<String, Any>> else { return }
-                    for dicionarioDeAluno in listaDeAlunos {
-                        AlunoDAO().salvaAluno(dicionarioDeAluno: dicionarioDeAluno)
-                    }
-                    AlunoUserDefaults().salvaVersao(resposta)
+                    self.serializaAlunos(resposta)
+                   
                     completion()
                 }
                 break
@@ -51,6 +48,10 @@ class AlunoAPI: NSObject {
                 switch response.result {
                 case . success:
                     print("ultimos alunos")
+                    if let resposta = response.result.value as? Dictionary<String, Any> {
+                        self.serializaAlunos(resposta)
+                    }
+                    completion()
                     break
                     
                 case .failure:
@@ -95,4 +96,23 @@ class AlunoAPI: NSObject {
         }
     }
     
+    // MARK: Serialização
+    func serializaAlunos(_ resposta: Dictionary<String, Any>){
+        guard let listaDeAlunos = resposta["alunos"] as? Array<Dictionary<String, Any>> else { return }
+        for dicionarioDeAluno in listaDeAlunos {
+            guard let status = dicionarioDeAluno["desativado"] as? Bool else { return }
+            if status{
+                guard let idDoAluno = dicionarioDeAluno["id"] as? String else { return }
+                guard let UUIDAluno = UUID (uuidString: idDoAluno) else { return }
+                if let aluno = AlunoDAO().recuperaAlunos().filter({ $0.id == UUIDAluno }).first {
+                    AlunoDAO().deletaAluno(aluno: aluno)
+                }
+                else {
+                    AlunoDAO().salvaAluno(dicionarioDeAluno: dicionarioDeAluno)
+                }
+            }
+            
+        }
+        AlunoUserDefaults().salvaVersao(resposta)
+    }
 }

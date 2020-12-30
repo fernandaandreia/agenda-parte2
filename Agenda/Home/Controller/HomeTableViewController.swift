@@ -36,18 +36,25 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
         recuperaTodosAlunos()
     }
     
+    func recuperaUltimosAlunos(_ versao: String){
+        Repositorio().recuperaUltimosAlunos(versao, completion: {
+            self.alunos = AlunoDAO().recuperaAlunos()
+            self.tableView.reloadData()
+        })
+    }
+    
     @objc  func recarregaAlunos(_ refreshControl:UIRefreshControl){
         let ultimaVersao = AlunoUserDefaults().recuperaUltimaVersao()
         if ultimaVersao == nil {
             recuperaTodosAlunos()
         } else {
             guard let versao = ultimaVersao else { return }
-            Repositorio().recuperaUltimosAlunos(versao) {
-                <#code#>
+            recuperaUltimosAlunos(versao)
             }
-        }
         refreshControl.endRefreshing()
-    }
+
+        }
+
     // MARK: - Métodos
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
